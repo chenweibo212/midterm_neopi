@@ -1,0 +1,20 @@
+{
+  "name": "midterm_neopi",
+  "version": "1.0.0",
+  "description": "library johnny-five node pixel: https://www.npmjs.com/package/node-pixel raspi-io: https://github.com/nebrius/raspi-io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rsync": "rsync -avz -e ssh --exclude=node_modules --delete . pi@raztaz.local:/home/pi/pi_pixels"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenweibo212/midterm_neopi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenweibo212/midterm_neopi/issues"
+  },
+  "homepage": "https://github.com/chenweibo212/midterm_neopi#readme"
+}
