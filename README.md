@@ -1,5 +1,8 @@
 # Hardware
 
+<img width="600" src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
+<img width="600" src="https://github.com/nginelli/PIAP/blob/master/_files/circuit.png">
+
 ## Needed Parts
 
 Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Digital Temperature and Humidity Sensor, Jumper Wires  <br/>
