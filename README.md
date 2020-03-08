@@ -12,8 +12,7 @@ Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Di
 <img align="left" width="100" height="100" src="https://boutique.semageek.com/741-large_default/neopixel-ring-with-12-led-rgb-led-and-driver-integrated.jpg">
 <img align="left" width="100" height="100" src="https://img2.bgxcdn.com/thumb/view/upload/G13charger/SKU031549%20.jpg">
 <img align="left" width="100" height="100" src="https://cdn.solarbotics.com/wp-content//uploads/45040-img_6236wht-5.jpg">
-<br /><br /><br /><br /><br /><br /><br />
-<br />
+<br /><br /><br /><br /><br /><br />
 
 ## Circuit
 
