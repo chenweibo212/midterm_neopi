@@ -11,7 +11,7 @@ Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Di
 <img align="left" width="100" height="100" src="https://cdn.solarbotics.com/wp-content//uploads/45040-img_6236wht-5.jpg">
 <br /><br /><br /><br /><br />
 
-# Libraries
+## Libraries
 
 johnny-five: https://www.npmjs.com/package/johnny-five  <br />
 node pixel: https://www.npmjs.com/package/node-pixel  <br />
