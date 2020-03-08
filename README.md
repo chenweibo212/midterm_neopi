@@ -1,6 +1,7 @@
 # Hardware
 
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
+<br /><br /><br /><br /><br />
 
 ## Needed Parts
 
@@ -17,6 +18,7 @@ Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Di
 
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/circuit.png">
 
+<br /><br /><br /><br /><br />
 
 ## Libraries
 
