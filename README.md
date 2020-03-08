@@ -22,3 +22,6 @@ Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Di
 
 ## Libraries
 
+## Usage
+- node neo_temp.js [sensorType] [gpioPin]
+
