@@ -30,5 +30,5 @@ npm install serialport <br />
 
 ## Usage
 - node neo_temp.js [sensorType] [gpioPin]<br />
-- node neo_temp.js [11] [4]
+- node neo_temp.js [22] [4]
 
