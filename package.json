@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rsync": "rsync -avz -e ssh --exclude=node_modules --delete . pi@raztaz.local:/home/pi/pi_pixels"
+    "rsync": "rsync -avz -e ssh --exclude=node_modules --delete . pi@piweibo.local:/home/pi/Documents/midterm"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/chenweibo212/midterm_neopi/issues"
   },
-  "homepage": "https://github.com/chenweibo212/midterm_neopi#readme"
+  "homepage": "https://github.com/chenweibo212/midterm_neopi#readme",
+  "dependencies": {
+    "promise": "^8.1.0"
+  }
 }
