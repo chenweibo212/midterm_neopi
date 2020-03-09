@@ -21,7 +21,14 @@ Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Di
 <br />
 
 ## Libraries
+npm install promise <br />
+npm install moment <br />
+npm install dht-sensor <br />
+npm install bunyan <br />
+npm install serialport <br />
+
 
 ## Usage
-- node neo_temp.js [sensorType] [gpioPin]
+- node neo_temp.js [sensorType] [gpioPin]<br />
+- node neo_temp.js [11] [4]
 
