@@ -3,11 +3,12 @@
 #include <SoftwareSerial.h>
 
 #define PIXEL_PIN 6
-#define NUMPIXELS 7
+#define NUMPIXELS 12
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
 int inData;
+int currColor;
 
 void setup() {
   Serial.begin(9600);
@@ -24,7 +25,7 @@ void loop() {
   // Your operations here
 
   while (Serial.available() > 0) {
-    
+    //convert serial data to int
     inData = Serial.parseInt();
     if (inData != NULL || inData != 0) {
       Serial.println(inData);
@@ -60,5 +61,5 @@ void colorCycle() {
   currColor++;
   Serial.print(currColor);
   delay(50);
-  if (currColor > 100) currColor = 0;
+  if (currColor > 360) currColor = 0;
 }
