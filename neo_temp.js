@@ -36,6 +36,19 @@ const log = bunyan.createLogger({
     ]
 });
 
+//setup serial port
+var colorH;
+var colorConfig = null;
+var serialMessage;
+
+const path = '/dev/ttyACM0';
+const SerialPort = require('serialport');
+const port = new SerialPort(path, {baudRate: 9600}, function(err){
+    if (err) {
+        return console.log('Error: ', err.message)
+      }
+});
+
 sensor.setMaxRetries(10);
 
 function fakeData(){
@@ -74,6 +87,17 @@ function fakeData(){
       });  
 }
 
+function realSensor(){
+    const reading = sensor.read(sensorType, gpioPin);
+    curTemp = reading.temperature.toFixed(1);
+    return curTemp
+}
+
+
+function mapRange(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
 function getReading(){
     var curTemp;
     var tempMessage;
@@ -96,8 +120,7 @@ function getReading(){
 
         setInterval(function(){
             //get sensor reading
-            const reading = sensor.read(sensorType, gpioPin);
-            curTemp = reading.temperature.toFixed(1);
+            curTemp = realSensor();
 
             const getDate = new Date;
             const date = moment(getDate).format().substring(0,10);
@@ -124,50 +147,56 @@ function getReading(){
             }
         }, 1000);
         
-      }, function(err) {
+      }).catch(function(err) {
         //when there is no sensor, use fake data
         fakeData();
         log.error(err);
         console.log(err);
-      });
+      })
 };
 
 getReading();
 
-//get color config from webapp
+function getColor(){
+    var userColorSetting = null;
+    var temp = realSensor();
+    var presetColor;
+    var previousTemp = null;
+    var promiseColorConfig = new Promise(async function(resolve,reject){
+        //fetch a (/api/configs/) in certain interval
 
-//setup serial port
-var serialMessage;
-var colorH;
-var colorConfig = null;
 
-const path = '/dev/ttyACM0';
-const SerialPort = require('serialport');
-const port = new SerialPort(path, {baudRate: 9600});
 
-if(colorConfig != null){
-    colorH = data.hueH;
-} else {
-    colorH = parseInt(mapRange(curTemp, -10, 35, 240, 0));
+        if (userColorSetting != null){
+            resolve("there is a user");
+        } else {
+            reject("use fake input");
+        }
+    })
+
+    promiseColorConfig.then(function(){
+        sendToArduino(userColorSetting.toString());
+    }).catch(function(err){
+        setTimeout(() => {
+            console.log(err);
+            sendToArduino("315");
+            setInterval(function(){
+            temp = realSensor();
+            presetColor = parseInt(mapRange(temp, -10, 35, 240, 0));
+            serialMessage = presetColor.toString();
+            console.log(serialMessage);
+                if(temp != previousTemp){
+                    sendToArduino(serialMessage);
+                    previousTemp = temp;
+                }
+            }, 1000);
+        }, 2500);
+    })
 }
 
-function mapRange(value, low1, high1, low2, high2) {
-    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-}
+getColor();
 
-//send color config to arduino through serial port 
-serialMessage = `${colorH}`;
-serialTestMessage = `${testColor}`;
-var testColor = 1;
-
-setInterval(function() {
-    testColor += 10;
-    if(testColor > 360){
-        testColor = 1;
-    }
-    serialMessage = `${testColor}`;
-    serialTestMessage = `${colorH}`;
-
+function sendToArduino(serialMessage){
     port.write(serialMessage, function(err) {
         if (err) {
             console.log('Error on write: ', err.message);
@@ -176,9 +205,4 @@ setInterval(function() {
         console.log(serialMessage);
         console.log('message written');
     })
-  
-    // Open errors will be emitted as an error event
-    port.on('error', function(err) {
-        console.log('Error: ', err.message)
-    })
-}, 1000);
+}
