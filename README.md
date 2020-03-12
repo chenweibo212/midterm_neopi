@@ -26,7 +26,7 @@ npm install moment <br />
 npm install dht-sensor <br />
 npm install bunyan <br />
 npm install serialport <br />
-
+npm install node-fetch <br />
 
 ## Usage
 - node neo_temp.js [sensorType] [gpioPin]<br />
