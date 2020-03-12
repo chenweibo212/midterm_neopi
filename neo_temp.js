@@ -2,6 +2,8 @@ const moment = require('moment');
 const sensor = require('node-dht-sensor');
 const Promise = require('promise');
 
+const fetch = require('node-fetch');
+
 var usage =
   "USAGE: node sync-implicit.js [sensorType] [gpioPin] <repeats>\n" +
   "    sensorType:\n" +
@@ -54,7 +56,7 @@ sensor.setMaxRetries(10);
 function fakeData(){
     var dummyMessage;
     const getDate = new Date;
-    const date = moment(getDate).format().substring(0,10);
+    const date = moment(getDate).format();
 
     sensor.initialize({    
         test: {
@@ -69,20 +71,19 @@ function fakeData(){
           if (!err) {
               dummyMessage = {
                   temp: temperature.toFixed(1),
-                  date: date,
+                  time: date,
                   valid: false
               };
               console.log(dummyMessage);
               //send fake data to server
-              async() => {
-                await fetch ('api/sensorreading/',{
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify(dummyMessage),
-                }).then(res => res.json()).then(res => console.log(res));
-              }
+              //async() => {await 
+                    fetch('http://localhost:3000/api/sensorreading/', { //waiting for server url
+                    method: 'post',
+                    body:
+                        JSON.stringify(dummyMessage),
+                    headers: { 'Content-Type': 'application/json' },
+                }).then(res => res.json()).then(json => console.log(json));
+              //}
           }
       });  
 }
@@ -123,28 +124,28 @@ function getReading(){
             curTemp = realSensor();
 
             const getDate = new Date;
-            const date = moment(getDate).format().substring(0,10);
+            const date = moment(getDate).format();
 
             log.info({temp:`${curTemp}`});
 
             tempMessage = {
-                temp: `${curTemp}`,
-                date: `${date}`,
+                temp: curTemp,
+                time: date,
                 valid: true
             };
 
             console.log(tempMessage);
             
+            //const url = "a-server-url" + "/api/sensorreading/";
             //send message to server
-            async() => {
-               await fetch ('api/sensorreading/',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(tempMessage), 
-               }).then(res => res.json()).then(res => console.log(res));
-            }
+            //async() => {await 
+                fetch('http://localhost:3000/api/sensorreading/', { //waiting for server url
+                    method: 'post',
+                    body:    JSON.stringify(tempMessage),
+                    headers: { 'Content-Type': 'application/json' },
+                }).then(res => res.json())
+                .then(json => console.log(json));
+            //}
         }, 1000);
         
       }).catch(function(err) {
@@ -163,7 +164,7 @@ function getColor(){
     var presetColor;
     var previousTemp = null;
     var promiseColorConfig = new Promise(async function(resolve,reject){
-        //fetch a (/api/configs/) in certain interval
+        //fetch a (url/api/configs/) in certain interval
 
 
 
@@ -180,7 +181,7 @@ function getColor(){
         setTimeout(() => {
             console.log(err);
             sendToArduino("315");
-            setInterval(function(){
+            setInterval(() => {
             temp = realSensor();
             presetColor = parseInt(mapRange(temp, -10, 35, 240, 0));
             serialMessage = presetColor.toString();

@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/chenweibo212/midterm_neopi#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongodb": "^3.5.5",
+    "node-fetch": "^2.6.0",
     "promise": "^8.1.0"
   }
 }
