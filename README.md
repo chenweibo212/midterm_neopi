@@ -1,9 +1,8 @@
 # Hardware
-
+<p align="center">
+<img src="https://github.com/nginelli/PIAP/blob/master/_files/neopi.gif"></p>
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_6888.jpg">
-<img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_7138.JPG">
-<img src="https://github.com/nginelli/PIAP/blob/master/_files/neopi.gif">
 
 
 <br />
