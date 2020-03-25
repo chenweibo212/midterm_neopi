@@ -1,6 +1,8 @@
 # Hardware
 
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
+<img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_6888.jpg">
+
 <br />
 
 ## Needed Parts
