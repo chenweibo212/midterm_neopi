@@ -1,7 +1,9 @@
+## Neopi Temperature Light 
+
+A networked temperature sensor that is driven by both temperature data and client web configurations.  Data is sent to a server which is then displayed to a client page.  Client side can modify color range for temperature values which are sent back to an a Raspberry Pi/ Arduino Uno color changing LED light.
+
 <br/>
-<b>A networked temperature sensor that is driven by both temperature data and client web configurations.  Data is sent to a server which is then displayed to a client page.  Client side can modify color range for temperature values which are sent back to an a Raspberry Pi/ Arduino Uno color changing LED light.</b>
-<br/>
-# Hardware
+## Hardware
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
 <br />
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/build.jpg">
