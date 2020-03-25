@@ -16,7 +16,7 @@ A networked temperature sensor that is driven by both temperature data and clien
 
 ## Needed Parts
 
-Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Digital Temperature and Humidity Sensor, Jumper Wires  <br/>
+Rasbperry Pi, Arduino Uno, 10k Ohm Resistor, Neopixel Ring/ 12 RGB LED, DHT22 Digital Temperature and Humidity Sensor, Jumper Wires (Optional: cardboard, wood, and frosted plexiglass for cover)  <br/>
 <img align="left" width="100" height="100" src="https://media.digikey.com/photos/Raspberry%20Pi/RASPBERRY-PI-3.jpg">
 <img align="left" width="100" height="100" src="https://www.kitronik.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/4/6/4622_large_arduino_uno_main_board.jpg">
 <img align="left" width="100" height="100" src="https://www.jameco.com/Jameco/Products/ProdImag/2237221.jpg">
