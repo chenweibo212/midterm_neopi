@@ -2,6 +2,9 @@
 
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_2114.jpg">
 <img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_6888.jpg">
+<img src="https://github.com/nginelli/PIAP/blob/master/_files/IMG_7138.jpg">
+<img src="https://github.com/nginelli/PIAP/blob/master/_files/neopi.gif">
+
 
 <br />
 
