@@ -77,7 +77,7 @@ function fakeData(){
               console.log(dummyMessage);
               //send fake data to server
               //async() => {await 
-                    fetch('http://localhost:3000/api/sensorreading/', { //waiting for server url
+                    fetch('https://midterm-for-all.herokuapp.com/api/sensorreading/', { //waiting for server url
                     method: 'post',
                     body:
                         JSON.stringify(dummyMessage),
@@ -136,17 +136,16 @@ function getReading(){
 
             console.log(tempMessage);
             
-            //const url = "a-server-url" + "/api/sensorreading/";
             //send message to server
             //async() => {await 
-                fetch('http://localhost:3000/api/sensorreading/', { //waiting for server url
+                fetch('https://midterm-for-all.herokuapp.com/api/sensorreading/', { //waiting for server url
                     method: 'post',
                     body:    JSON.stringify(tempMessage),
                     headers: { 'Content-Type': 'application/json' },
                 }).then(res => res.json())
                 .then(json => console.log(json));
             //}
-        }, 1000);
+        }, 20000);
         
       }).catch(function(err) {
         //when there is no sensor, use fake data
@@ -158,25 +157,54 @@ function getReading(){
 
 getReading();
 
+  async function getData() {
+    try {
+      let response = await fetch('http://midterm-for-all.herokuapp.com/api/getconfig');
+      let data = await response.json();
+      return data;
+    } catch(err) {
+      console.log(err);
+      return null;
+    }
+  }
+  
+
 function getColor(){
-    var userColorSetting = null;
+    var userColorSetting;
     var temp = realSensor();
     var presetColor;
     var previousTemp = null;
-    var promiseColorConfig = new Promise(async function(resolve,reject){
-        //fetch a (url/api/configs/) in certain interval
+    var promiseColorConfig = new Promise(async function(resolve, reject){
+              console.log('getting data...');
+              let data = await getData();
+              console.log(data[data.length-1]);
 
+              let userColorSetting = data[data.length-1].hue;
+              let userHighTemp = data[data.length-1].high;
+              let userLowTemp = data[data.length-1].low;
+              console.log(userColorSetting + "," + userHighTemp + "," + userLowTemp);
+              let config= [userColorSetting, userHighTemp, userLowTemp];
 
+              if (userColorSetting != null){
+                    resolve(config);
+                } else {
+                    reject("use fake input");
+                }
+    });
 
-        if (userColorSetting != null){
-            resolve("there is a user");
-        } else {
-            reject("use fake input");
-        }
-    })
-
-    promiseColorConfig.then(function(){
-        sendToArduino(userColorSetting.toString());
+    promiseColorConfig.then(function(config){
+            let colorConfig = config[0];
+            let highConfig = config[1];
+            let lowConfig = config[2];
+            if (temp > highConfig){
+                let hotColor = 10;
+                sendToArduino(hotColor.toString());
+            } else if (temp < lowConfig){
+                let coldColor = 240;
+                sendToArduino(coldColor.toString());
+            } else {
+                sendToArduino(colorConfig.toString());
+            }
     }).catch(function(err){
         setTimeout(() => {
             console.log(err);
@@ -195,7 +223,7 @@ function getColor(){
     })
 }
 
-getColor();
+setInterval(getColor,5000);
 
 function sendToArduino(serialMessage){
     port.write(serialMessage, function(err) {
@@ -203,7 +231,7 @@ function sendToArduino(serialMessage){
             console.log('Error on write: ', err.message);
             log.error('Error on write: ', err.message);
         }
-        console.log(serialMessage);
+        console.log('sending to arduino this ' + serialMessage);
         console.log('message written');
     })
 }
