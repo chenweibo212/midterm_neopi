@@ -39,8 +39,6 @@ const log = bunyan.createLogger({
 });
 
 //setup serial port
-var colorH;
-var colorConfig = null;
 var serialMessage;
 
 const path = '/dev/ttyACM0';
